@@ -13,5 +13,5 @@ SimpleCov::formatter = SimpleCov::Formatter::MultiFormatter.new([
 SimpleCov.start
 
 ## Capybara
-require File.join(File.dirname(__FILE__), '..', 'bookmark_manager.rb')
+require File.join(File.dirname(__FILE__), '..', 'app/bookmark_manager.rb')
 Capybara.app = BookmarkManager
