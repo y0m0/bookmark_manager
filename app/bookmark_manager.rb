@@ -20,12 +20,18 @@ class BookmarkManager < Sinatra::Base
   end
   
   post '/links' do
-    link = Link.new(url: params[:url],
+    link = Link.new(url: params[:url],              # 1. Create a new instance of link
              title: params[:title])
-    tag = Tag.first_or_create(name: params[:tags])
-    link.tags << tag
-    link.save
+    tag = Tag.first_or_create(name: params[:tags])  # 2. Create a tag for the link
+    link.tags << tag                                # 3. Add the tag to the link's datamapper collection
+    link.save                                       # 4. Save the link
     redirect '/links'
+  end
+  
+  get '/tags/:name' do
+    tag = Tag.first(name: params[:name])
+    @links = tag ? tag.links : []
+    erb :'links/index'
   end
 
 end
