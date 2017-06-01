@@ -4,7 +4,6 @@ require 'sinatra/base'
 require_relative 'datamapper_setup'
 
 class BookmarkManager < Sinatra::Base
-  set :session_secret, "Supa Secret!"
 
   get '/' do
     'Bookmark Manager'
@@ -20,8 +19,10 @@ class BookmarkManager < Sinatra::Base
   end
   
   post '/links' do
+    p 'hello'
     link = Link.new(url: params[:url],              # 1. Create a new instance of link
              title: params[:title])
+    Tag.create(name: 'test')
     tag = Tag.first_or_create(name: params[:tags])  # 2. Create a tag for the link
     link.tags << tag                                # 3. Add the tag to the link's datamapper collection
     link.save                                       # 4. Save the link
