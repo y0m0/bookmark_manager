@@ -40,7 +40,7 @@ class BookmarkManager < Sinatra::Base
   
   get '/tags/:name' do
     name = params[:name]
-    tag = Tag.first(name: name, condition: ['lower(name) = ?', name.downcase])
+    tag = Tag.all( conditions: ['lower(name) = ?', params[:name].downcase])
     @links = tag ? tag.links : []
     erb :'links/index'
   end
