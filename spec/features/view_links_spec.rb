@@ -10,14 +10,13 @@ feature 'view links' do
   end
 
   scenario 'I want to see a list of links' do
-    
     visit '/links'
 
     # check if the page is loaded correctly
     expect(page.status_code).to eq 200
 
     within 'ul#links' do
-      expect(page).to have_content('Hackaday')
+      expect(page).to have_content 'Hackaday'
     end
   end
 
@@ -25,11 +24,10 @@ feature 'view links' do
     visit '/tags/coding'
 
     within 'ul#links' do
-      expect(page).not_to have_content('Hackaday')
-      expect(page).not_to have_content('Reddit')
-      expect(page).not_to have_content('Google')
-      expect(page).to have_content('P-M')
+      expect(page).not_to have_content 'Hackaday'
+      expect(page).not_to have_content 'Reddit'
+      expect(page).not_to have_content 'Google'
+      expect(page).to have_content 'P-M'
     end
-
   end
 end
